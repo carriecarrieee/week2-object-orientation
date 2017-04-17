@@ -79,7 +79,7 @@ class Student(object):
     def __repr__(self):
         """ Returns student name and address stored in dictionary."""
 
-        return "first name: {}, \nlast name: {}, \naddress: {}".format(
+        return "First Name: {}, \nLast Name: {}, \nAddress: {}".format(
             self.first_name, self.last_name, self.address)
 
 class Question(object):
@@ -94,15 +94,15 @@ class Question(object):
     def __repr__(self):
         """ Returns dictionary of (question: correct_answer)."""
 
-        return "question: {}, \ncorrect_answer: {}".format(self.question,
+        return "Question: {}, \nCorrect Answer: {}".format(self.question,
             self.correct_answer)
 
     def ask_and_evaluate(self):
         """ Prints question, prompts user for answer, then evaluates answer."""
 
-        print question
+        print self.question
         answer = raw_input("> ")
-        if answer == correct_answer:
+        if answer == self.correct_answer:
             return True
         else:
             return False
@@ -110,17 +110,17 @@ class Question(object):
 class Exam(object):
     """Stores data that is a dictionary of (question: correct answers)."""
 
-    def __init__(self, name):
+    def __init__(self, exam_name):
         """ Initializes the class variables and attribute."""
 
-        self.name = name
+        self.exam_name = exam_name
         self.questions_list = [] # list of Question objects
 
     def __repr__(self):
         """ Returns a dictionary containting values point to lists of questions
             and answers."""
 
-        return "name: {}, list of questions: [{}]".format(self.name, 
+        return "Exam Name: {}, List of Questions: {}".format(self.exam_name, 
             self.questions_list)
 
     def add_question(self, question, correct_answer):
@@ -134,9 +134,38 @@ class Exam(object):
 
         score = 0.00 # set to a float
 
-        num_corr_response = self.ask_and_evaluate()
-        for question in questions_list:
+        # Call the method on the 
+        for question in self.questions_list:
+            num_corr_response = question.ask_and_evaluate()
             if num_corr_response == True:
                 score += 1
 
-        return self.score / len(self.questions_list)
+        return score / len(self.questions_list) * 100
+
+# class StudentExam(object):
+#     """ Stores a student, an exam, and score."""
+
+#     def __init__(self, name, exam_name):
+#         """ Initialize subclass attributes."""
+
+#         self.name = name
+#         self.exam_name = exam_name
+#         self.score = 0
+
+#     def take_test(self):
+#         """ Administers the exam and assigns actual score to the instance."""
+
+#         score = self.administer()
+#         print self.score
+
+#     def __repr__(self):
+#         """ Returns a dictionary of {student_name: (exam, score)}."""
+
+#         return "{}: ({}, {})".format(self.name, self.exam, self.score)
+
+# def example():
+#     """ Creates exam and student, administers exam via StudentExam instance."""
+    
+#     sample_exam = Exam("Final")
+#     student = Student("Fido")
+#     fido_exam = StudentExam(sample_exam, student)
