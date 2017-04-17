@@ -120,8 +120,8 @@ class Exam(object):
         """ Returns a dictionary containting values point to lists of questions
             and answers."""
 
-            return "name: {}, list of questions: [{}]".format(self.name, 
-                self.questions_list)
+        return "name: {}, list of questions: [{}]".format(self.name, 
+            self.questions_list)
 
     def add_question(self, question, correct_answer):
         """Adds question and correct_answer to questions list"""
@@ -132,11 +132,11 @@ class Exam(object):
     def administer(self):
         """ Administers all questions and returns user score. """
 
-        score = 0.00
+        score = 0.00 # set to a float
 
         num_corr_response = self.ask_and_evaluate()
         for question in questions_list:
-            if num_corr_response == True,
+            if num_corr_response == True:
                 score += 1
 
         return self.score / len(self.questions_list)
